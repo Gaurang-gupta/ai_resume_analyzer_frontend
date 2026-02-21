@@ -3,14 +3,13 @@ import Header from "@/app/components/Header";
 import {notFound} from "next/navigation";
 import {createSupabaseServerClient} from "@/lib/supabase/server";
 
-interface PageProps {
-    children: ReactNode,
-    params: {
-        resumeId: string;
-    }
-}
 
-export default async function ResumeLayout({ children, params }: PageProps) {
+export default async function ResumeLayout({ children, params }: {
+    children: ReactNode,
+    params: Promise<{
+        resumeId: string;
+    }>
+}) {
     const supabase = await createSupabaseServerClient()
     const { resumeId } = await params
     const {
