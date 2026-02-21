@@ -46,7 +46,7 @@ export async function uploadResume(formData: FormData) {
     }
 
     // ✅ Hash
-    const textHash = hashText(file);
+    const textHash = await hashText(file);
 
     // ✅ Check duplicate BEFORE upload
     const { data: existing } = await supabase
@@ -57,7 +57,11 @@ export async function uploadResume(formData: FormData) {
         .maybeSingle();
 
     if (existing) {
-        throw new Error("This resume has already been uploaded.");
+        // throw new Error("This resume has already been uploaded.");
+        return {
+            ok: false,
+            resumeId: "existing"
+        }
     }
 
     // ✅ Upload to storage

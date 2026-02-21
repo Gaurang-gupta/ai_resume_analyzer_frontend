@@ -20,6 +20,11 @@ export default function ResumeUploadForm() {
             try {
                 const result = await uploadResume(formData)
 
+                if(!result.ok) {
+                    setError("This resume is already uploaded")
+                    return;
+                }
+
                 if (result?.resumeId) {
                     router.push(`/resumes/${result.resumeId}`)
                 }
