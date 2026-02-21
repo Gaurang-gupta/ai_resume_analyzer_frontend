@@ -23,8 +23,9 @@ export default function ResumeUploadForm() {
                 if (result?.resumeId) {
                     router.push(`/resumes/${result.resumeId}`)
                 }
-            } catch (err: any) {
-                setError(err.message || "Something went wrong")
+            } catch (err) {
+                setError("Something went wrong")
+                console.log(err)
             }
         })
     }
