@@ -3,9 +3,9 @@ import NewAnalysisForm from "@/app/components/resume/NewAnalysisForm"
 import {createSupabaseServerClient} from "@/lib/supabase/server";
 import {notFound} from "next/navigation";
 interface PageProps {
-    params: {
+    params: Promise<{
         resumeId: string
-    }
+    }>
 }
 export default async function NewAnalyses({ params }: PageProps) {
     const supabase = await createSupabaseServerClient()

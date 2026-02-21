@@ -12,9 +12,6 @@ export default function Navbar({ user } : { user : User | null}) {
     const supabase = createSupabaseBrowserClient()
     const router = useRouter();
     const pathname = usePathname()
-    // if(user === null || user === undefined) {
-    //     router.push('/login')
-    // }
     async function handleLogout() {
         await supabase.auth.signOut()
 

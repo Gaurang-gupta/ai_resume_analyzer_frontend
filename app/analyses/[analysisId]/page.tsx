@@ -8,9 +8,9 @@ import {SupabaseClient} from "@supabase/supabase-js";
 import SkillBadge from "@/app/components/SkillBadge";
 
 interface PageProps {
-    params: {
+    params: Promise<{
         analysisId: string
-    }
+    }>
 }
 
 interface ResumeData {

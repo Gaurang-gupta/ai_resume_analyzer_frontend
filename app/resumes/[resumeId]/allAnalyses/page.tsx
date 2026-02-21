@@ -4,9 +4,9 @@ import StatusBadge from "@/app/components/ui/StatusBadge";
 import {createSupabaseServerClient} from "@/lib/supabase/server";
 import {notFound} from "next/navigation";
 interface PageProps {
-    params: {
+    params: Promise<{
         resumeId: string
-    }
+    }>
 }
 export default async function AllAnalyses({ params }: PageProps) {
     const supabase = await createSupabaseServerClient()
