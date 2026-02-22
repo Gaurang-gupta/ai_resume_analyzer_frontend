@@ -1,12 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import Link from "next/link"
 import {AnalysisResult, FrontEndFullAnalzeRow} from "@/types"
-import Card from "@/app/components/ui/Card"
 import {SupabaseClient} from "@supabase/supabase-js";
-import SkillBadge from "@/app/components/SkillBadge";
-import ScoreGauge from "@/app/components/ScoreGauge";
-import { Maximize2, ChevronLeft, FileText} from "lucide-react";
 import AnalysisReportPage from "@/app/components/AnalysesReportPage";
 import { ResumeData } from "@/types";
 
@@ -15,8 +10,6 @@ interface PageProps {
         analysisId: string
     }>
 }
-
-
 
 async function resume_data(resumeId: string, supabase: SupabaseClient, userId:string) {
     const { data, error } = await supabase
