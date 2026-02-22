@@ -161,15 +161,18 @@ export default async function SkillLabPage() {
                             <AlertCircle className="text-indigo-600 w-5 h-5" />
                             High Impact Update
                         </h3>
-                        <p className="text-sm text-indigo-700 leading-relaxed mb-4">
-                            Your resume <strong className="font-black">{atRiskResume?.filename}</strong> is currently trailing market demand. Adding the top 2 skills could boost its performance significantly.
-                        </p>
-                        <Link
-                            href={`/resumes/${atRiskResume?.id}`}
-                            className="text-xs font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-800 transition-colors"
-                        >
-                            Go to Workspace →
-                        </Link>
+                        {analyses && analyses.length >0 &&
+                            <>
+                                <p className="text-sm text-indigo-700 leading-relaxed mb-4">
+                                    Your resume <strong className="font-black">{atRiskResume?.filename}</strong> is currently
+                                    trailing market demand. Adding the top 2 skills could boost its performance significantly.
+                                </p>
+                                <Link href={`/resumes/${atRiskResume?.id}`}
+                                className="text-xs font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-800 transition-colors"
+                                >
+                                    Go to Workspace →
+                                </Link>
+                            </>}
                     </Card>
                 </div>
             </div>
