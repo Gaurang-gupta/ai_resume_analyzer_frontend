@@ -1,11 +1,13 @@
 export default function SkillBadge({
                         label,
                         variant,
-                        count
+                        count,
+    className,
                     }: {
     label: string
     variant: 'matched' | 'missing'
-    count?: number
+    count?: number,
+    className?: string
 }) {
     const styles =
         variant === 'matched'
@@ -13,7 +15,7 @@ export default function SkillBadge({
             : 'bg-red-100 text-red-700'
 
     return (
-        <span className={`text-xs py-1 rounded ${styles}`}>
+        <span className={`text-xs py-1 rounded ${styles} ${className}`}>
             <span
                 className={`px-2 rounded ${styles}`}
             >
