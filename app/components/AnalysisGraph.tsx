@@ -8,6 +8,7 @@ import {
 } from "recharts";
 import Card from "@/app/components/ui/Card";
 import { BarChart3, TrendingUp, AlertCircle, Info } from "lucide-react";
+import AnimatedScore from "@/app/components/ui/AnimatedScore";
 
 // Types stay the same
 interface ChartPoint { index: number; score: number; movingAverage: number; date: string; job: string; }
@@ -268,7 +269,12 @@ function MetricCard({ label, value, subValue, color }: { label: string, value: s
     return (
         <Card className="p-5 sm:p-6 border-slate-200 rounded-2xl sm:rounded-3xl hover:shadow-md transition-all group">
             <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{label}</p>
-            <p className="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors">{value}</p>
+            <p className="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors">
+                {typeof value === "number" ?
+                <AnimatedScore score={Number(value)}/> :
+                    <AnimatedScore showPercentage={true} score={Number(value.slice(0, value.length - 1))}/>
+                }
+            </p>
             <p className="text-[10px] sm:text-xs font-medium text-slate-500 mt-2 flex items-center gap-1">
                 <span className={`w-1.5 h-1.5 rounded-full ${colorMap[color].split(' ')[1]}`} />
                 {subValue}

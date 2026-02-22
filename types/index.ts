@@ -65,3 +65,11 @@ export interface FrontEndFullAnalzeRow {
     failed_at: string;
     experience_level: 'student' | '0-2' | '3-5' | '6+' | 'career_switcher'
 }
+
+export interface ResumeData {
+    id: string,
+    user_id : string,
+    filename: string,
+    storage_path: string,
+    created_at: string,
+}

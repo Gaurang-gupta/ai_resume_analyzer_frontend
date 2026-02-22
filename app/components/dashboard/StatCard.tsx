@@ -5,6 +5,7 @@ interface StatCardProps {
     icon?: ReactNode
 }
 import Card from "@/app/components/ui/Card"
+import AnimatedScore from "@/app/components/ui/AnimatedScore";
 
 export default function StatCard({ label, value, icon, color = "indigo" }: StatCardProps & { color?: string }) {
     const colors: Record<string, string> = {
@@ -17,7 +18,12 @@ export default function StatCard({ label, value, icon, color = "indigo" }: StatC
         <Card className="flex items-center justify-between p-6 rounded-3xl border-slate-200 hover:shadow-md transition-shadow">
             <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{label}</p>
-                <p className="text-3xl font-black text-slate-900 tracking-tight">{value}</p>
+                <p className="text-3xl font-black text-slate-900 tracking-tight">
+                    {typeof value === "number" ?
+                        <AnimatedScore score={Number(value)}/> :
+                        <AnimatedScore showPercentage={true} score={Number(value.slice(0, value.length - 1))}/>
+                    }
+                </p>
             </div>
 
             <div className={`p-3 rounded-2xl border ${colors[color]}`}>
