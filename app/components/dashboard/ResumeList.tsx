@@ -21,7 +21,7 @@ export default function ResumeList({ resumes, analyses }: { resumes: FrontEndRes
                 const completedCount = analyses.filter((a: FrontEndAnalyzeData) => a.status === "completed" && a.resume_id === resume.id).length;
 
                 return (
-                    <div key={resume.id} className="group relative bg-white border border-slate-200 p-5 sm:p-6 rounded-[2rem] hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50 transition-all overflow-x-scroll">
+                    <div key={resume.id} className="group relative bg-white border border-slate-200 p-5 sm:p-6 rounded-[2rem] hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50 transition-all max-sm:overflow-x-scroll">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
 
                             <div className="flex items-center gap-5">
@@ -30,7 +30,7 @@ export default function ResumeList({ resumes, analyses }: { resumes: FrontEndRes
                                 </div>
                                 <div>
                                     <div className="relative group cursor-pointer">
-                                        <h3 className="font-black text-slate-900 max-sm:text-md sm:text-lg group-hover:text-indigo-700 transition-colors">{resume.filename.slice(0, 30)}...</h3>
+                                        <h3 className="font-black text-slate-900 max-sm:text-md sm:text-lg group-hover:text-indigo-700 transition-colors">{resume.filename}</h3>
                                         <div className="absolute top-full right-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                                             <div className="bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-md whitespace-nowrap shadow-xl">
                                                 {resume.filename}

@@ -3,6 +3,7 @@
 import "./globals.css"
 import Navbar from "@/app/components/layout/Navbar"
 import {createSupabaseServerClient} from "@/lib/supabase/server";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
     title: "IngestAI",
@@ -27,6 +28,7 @@ export default async function RootLayout({
                 <main className="max-w-6xl mx-auto px-6 py-8">
                     {children}
                 </main>
+                <Analytics/>
             </body>
         </html>
     )
