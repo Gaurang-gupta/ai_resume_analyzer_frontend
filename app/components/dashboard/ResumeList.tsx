@@ -21,7 +21,7 @@ export default function ResumeList({ resumes, analyses }: { resumes: FrontEndRes
                 const completedCount = analyses.filter((a: FrontEndAnalyzeData) => a.status === "completed" && a.resume_id === resume.id).length;
 
                 return (
-                    <div key={resume.id} className="group relative bg-white border border-slate-200 p-5 sm:p-6 rounded-[2rem] hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50 transition-all">
+                    <div key={resume.id} className="group relative bg-white border border-slate-200 p-5 sm:p-6 rounded-[2rem] hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50 transition-all overflow-x-scroll">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
 
                             <div className="flex items-center gap-5">

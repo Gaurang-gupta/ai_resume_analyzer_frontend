@@ -164,7 +164,7 @@ export default async function SkillLabPage() {
                         {analyses && analyses.length >0 &&
                             <>
                                 <p className="text-sm text-indigo-700 leading-relaxed mb-4">
-                                    Your resume <strong className="font-black">{atRiskResume?.filename}</strong> is currently
+                                    Your resume <strong className="font-black">{atRiskResume?.filename.toString().slice(0, Math.min(20, atRiskResume?.filename.toString().length))}...</strong> is currently
                                     trailing market demand. Adding the top 2 skills could boost its performance significantly.
                                 </p>
                                 <Link href={`/resumes/${atRiskResume?.id}`}
