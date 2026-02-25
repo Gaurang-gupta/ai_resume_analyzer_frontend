@@ -10,7 +10,7 @@ export default async function Header({ filename, created_at, signedUrl, resume_i
                                      }
 ) {
     return (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10 pb-8 border-b border-slate-200 overflow-x-scroll">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10 pb-8 border-b border-slate-200 max-sm:overflow-x-scroll">
             {/* Left Section: Info */}
             <div className="space-y-1">
                 <Link
