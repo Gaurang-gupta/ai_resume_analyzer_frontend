@@ -92,12 +92,10 @@ export default async function ResumeWorkspace({ params }: PageProps) {
                                     </p>
                                 </div>
 
-                                {totalAnalyses > 0 && (
-                                    <Link href={`/resumes/${resumeId}/newAnalyses`} className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-indigo-600 transition-all active:scale-95 shadow-lg shadow-slate-200">
-                                        <PlusCircle className="w-4 h-4" />
-                                        New Scan
-                                    </Link>
-                                )}
+                                <Link href={`/resumes/${resumeId}/newAnalyses`} className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-indigo-600 transition-all active:scale-95 shadow-lg shadow-slate-200">
+                                    <PlusCircle className="w-4 h-4" />
+                                    New Scan
+                                </Link>
                             </div>
 
                             <div className="relative min-h-[450px] w-full bg-slate-50/30 rounded-[1.5rem] p-4 sm:p-8 border border-slate-100 backdrop-blur-sm">
