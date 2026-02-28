@@ -46,7 +46,7 @@ export default async function ResumeWorkspace({ params }: PageProps) {
     // Calculate simple stats for the top row
     const latestScore = totalAnalyses > 0 ? analysesTypecasted[totalAnalyses - 1].result?.overallScore : 0;
     const avgScore = totalAnalyses > 0
-        ? Math.round(analysesTypecasted.reduce((acc, curr) => acc + (curr.result?.overallScore || 0), 0) / totalAnalyses)
+        ? Math.round(analysesTypecasted.reduce((acc, curr) => acc + (curr?.result?.overallScore || 0), 0) / totalAnalyses)
         : 0;
 
     return (
@@ -150,7 +150,7 @@ function StatBox({ label, value, icon, description }: { label: string, value: st
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
             </div>
             <div className="space-y-1">
-                <p className="text-3xl font-black text-slate-900 tracking-tight"><AnimatedScore showPercentage={!(final_value === value)} score={Number(final_value)}/></p>
+                <p className="text-3xl font-black text-slate-900 tracking-tight"><AnimatedScore showPercentage={!(final_value === value)} score={final_value !== "undefined" ? Number(final_value) : 0}/></p>
                 <p className="text-[11px] font-medium text-slate-500">{description}</p>
             </div>
         </Card>

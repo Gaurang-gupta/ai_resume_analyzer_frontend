@@ -20,20 +20,21 @@ const BENCHMARK_SCORE = 80;
 export default function ResumePerformancePage({ analyses }: { analyses: FrontEndFullAnalzeRow[] }) {
         // ================= BASIC METRICS =================
 
-    const totalCompleted = analyses.length;
+    const totalCompleted = analyses.filter((a) => a.status==="completed").length;
 
     const averageScore = useMemo(() => {
         if (!analyses.length) return 0;
+        const completed = analyses.filter((a) => a.status==="completed")
         return (
-            analyses.reduce((sum, a) => sum + a.result.overallScore, 0) /
-            analyses.length
+            completed.reduce((sum, a) => sum + (a?.result?.overallScore ?? 0), 0) /
+            completed.length
         );
     }, [analyses]);
 
     const volatility = useMemo(() => {
         if (analyses.length < 2) return 0;
-
-        const scores = analyses.map(a => a.result.overallScore);
+        const completed = analyses.filter((a) => a.status==="completed")
+        const scores = completed.map(a => (a?.result?.overallScore ?? 0));
         const mean =
             scores.reduce((sum, s) => sum + s, 0) / scores.length;
 
@@ -44,7 +45,7 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
         return Math.sqrt(variance);
     }, [analyses]);
 
-    const latestAnalysis = analyses[analyses.length - 1];
+    const latestAnalysis = analyses.filter((a) => a.status==="completed")[analyses.length - 1];
 
     // ================= MOVING AVERAGE =================
 
@@ -55,12 +56,12 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
             const start = Math.max(0, index - windowSize + 1);
             const subset = analyses.slice(start, index + 1);
             const avg =
-                subset.reduce((sum, s) => sum + s.result.overallScore, 0) /
+                subset.reduce((sum, s) => sum + (s?.result?.overallScore ?? 0), 0) /
                 subset.length;
 
             return {
                 index: index + 1,
-                score: a.result.overallScore,
+                score: (a?.result?.overallScore ?? 0),
                 movingAverage: Number(avg.toFixed(2)),
                 date: new Date(a.created_at).toLocaleDateString(),
                 job: a.job_title,
@@ -74,7 +75,7 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
         const counter: Record<string, number> = {};
 
         analyses.forEach(a => {
-            a.result.skills.missing.forEach(skill => {
+            a.result?.skills?.missing.forEach(skill => {
                 counter[skill] = (counter[skill] || 0) + 1;
             });
         });
@@ -99,8 +100,8 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
             range: r.label,
             count: analyses.filter(
                 a =>
-                    a.result.overallScore >= r.min &&
-                    a.result.overallScore < r.max
+                    a?.result?.overallScore >= r.min &&
+                    a?.result?.overallScore < r.max
             ).length,
         }));
     }, [analyses]);
@@ -133,7 +134,7 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
                 <MetricCard label="Analyses" value={totalCompleted} subValue="Reports generated" color="indigo" />
                 <MetricCard label="Avg Score" value={`${averageScore.toFixed(1)}%`} subValue="Overall match" color="emerald" />
                 <MetricCard label="Volatility" value={volatility.toFixed(1)} subValue="Score stability" color="amber" />
-                <MetricCard label="Latest" value={`${latestAnalysis?.result.overallScore ?? 0}%`} subValue="Latest attempt" color="blue" />
+                <MetricCard label="Latest" value={`${latestAnalysis?.result?.overallScore ?? 0}%`} subValue="Latest attempt" color="blue" />
             </div>
 
             {/* ================= PRIMARY TREND CHART ================= */}
@@ -248,7 +249,7 @@ export default function ResumePerformancePage({ analyses }: { analyses: FrontEnd
                             Latest Strategy Insight
                         </h2>
                         <p className="text-indigo-100 leading-relaxed text-lg italic">
-                            &ldquo;{latestAnalysis.result.summary}&rdquo;
+                            &ldquo;{latestAnalysis?.result?.summary}&rdquo;
                         </p>
                     </div>
                 </Card>
